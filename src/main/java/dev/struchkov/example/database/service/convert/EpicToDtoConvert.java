@@ -21,6 +21,7 @@ public class EpicToDtoConvert implements Converter<Epic, EpicDto> {
                         .map(subtaskToDtoConvert::convert)
                         .toList()
         );
+        epicDto.setName(source.getName());
         epicDto.setStatus(source.getStatus());
         epicDto.setGoal(source.getGoal());
         epicDto.setSubtaskIds(source.getSubtaskIds());

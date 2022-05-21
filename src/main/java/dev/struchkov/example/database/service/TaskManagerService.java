@@ -14,10 +14,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class TaskManagerService {
 
-
     private final EpicService epicService;
-    private final SubtaskService subtaskService;
-//    private final TaskService taskService;
 
     @Transactional
     public Subtask createSubtask(@NonNull Long epicId, @NonNull Subtask subtask) {
