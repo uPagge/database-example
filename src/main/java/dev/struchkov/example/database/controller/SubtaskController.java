@@ -28,9 +28,10 @@ public class SubtaskController {
     private final ConversionService conversionService;
 
     @PostMapping
-    @Operation(description = "Создание новой подзадачи")
+    @Operation(summary = "Создание новой подзадачи")
     public ResponseEntity<SubtaskDto> create(
-            @RequestBody SubtaskDto subtaskDto, @RequestParam("epic_id") Long epicId
+            @RequestBody SubtaskDto subtaskDto,
+            @RequestParam("epic_id") Long epicId
     ) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(
@@ -42,7 +43,7 @@ public class SubtaskController {
     }
 
     @PutMapping
-    @Operation(description = "Обновление подзадачи")
+    @Operation(summary = "Обновление подзадачи")
     public ResponseEntity<SubtaskDto> update(@RequestBody SubtaskDto subtaskDto) {
         return ResponseEntity.ok(
                 conversionService.convert(

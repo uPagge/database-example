@@ -4,6 +4,7 @@ import dev.struchkov.example.database.domain.TaskStatus;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,9 +17,10 @@ import javax.persistence.Table;
 @Entity
 @Getter
 @Setter
+@ToString
 @Table(name = "task")
-@EqualsAndHashCode(callSuper = true)
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 public class Task extends BaseEntity {
 
     @Column(name = "name")

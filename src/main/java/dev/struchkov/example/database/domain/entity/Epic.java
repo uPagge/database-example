@@ -4,6 +4,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
@@ -24,6 +25,7 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
+@ToString(callSuper = true)
 @Table(name = "epic")
 @PrimaryKeyJoinColumn(name = "id")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
