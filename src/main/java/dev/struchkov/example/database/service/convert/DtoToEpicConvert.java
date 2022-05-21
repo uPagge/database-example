@@ -10,19 +10,12 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class DtoToEpicConvert implements Converter<EpicDto, Epic> {
 
-    private final DtoToSubtaskConvert dtoToSubtaskConvert;
-
     @Override
     public Epic convert(EpicDto source) {
         final Epic epic = new Epic();
         epic.setId(source.getId());
         epic.setGoal(source.getGoal());
         epic.setName(source.getName());
-        epic.setSubtasks(
-                source.getSubtasks().stream()
-                        .map(dtoToSubtaskConvert::convert)
-                        .toList()
-        );
         return epic;
     }
 
