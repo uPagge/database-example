@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="2022-05-20-tag-v-0-0-1" author="uPagge">
+        <tagDatabase tag="0.0.1"/>
+    </changeSet>
+
+    <changeSet id="2022-05-20-create-table-task" author="uPagge">
+        <createTable tableName="task" remarks="Обычные задачи">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(100)" remarks="Название задачи"/>
+            <column name="status" type="varchar(30)" remarks="Статус задачи">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2022-05-20-create-table-epic" author="uPagge">
+        <createTable tableName="epic" remarks="Задачи эпики">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false" references="task(id)"
+                             foreignKeyName="epic_task_id_task_id" deleteCascade="true"/>
+            </column>
+            <column name="goal" type="text" remarks="Цель, которую мы достигнем, выполнив эпик"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2022-05-20-create-table-subtask" author="uPagge">
+        <createTable tableName="subtask" remarks="Подзадачи эпика">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false" references="task(id)"
+                             foreignKeyName="subtask_task_id_task_id" deleteCascade="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2022-05-20-create-link-epic-subtask" author="uPagge">
+        <createTable tableName="epic_subtasks">
+            <column name="epic_id" type="bigint">
+                <constraints nullable="true" references="epic(id)"
+                             foreignKeyName="epics_subtask_epic_id_epic_task_id" deleteCascade="true"/>
+            </column>
+            <column name="subtasks_id" type="bigint">
+                <constraints nullable="false" references="subtask(id)"
+                             foreignKeyName="epics_subtask_subtask_id_subtask_task_id" deleteCascade="true"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey tableName="epic_subtasks" columnNames="epic_id, subtasks_id"/>
+    </changeSet>
+
+</databaseChangeLog>

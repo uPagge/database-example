@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: "Task Manager"
+  datasource:
+    url: jdbc:postgresql://localhost:5432/task_manager
+    username: postgres
+    password: 121314Ma
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: liquibase/changelog-master.xml
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
